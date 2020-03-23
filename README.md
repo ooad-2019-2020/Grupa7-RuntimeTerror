@@ -1,5 +1,9 @@
+# Tema: Studentski dom
 # Grupa7-RuntimeTerror
-Studentski dom
-Dženana Huseinspahić
-Esma Karahodža
-Dženeta Kudumović
+
+## Built With
+
+* [Dženana Huseinspahić](https://github.com/dzhuseinspahic)
+* [Esma Karahodža](https://github.com/ekarahodza1)
+* [Dženeta Kudumović](https://github.com/dkudumovic1)
+
