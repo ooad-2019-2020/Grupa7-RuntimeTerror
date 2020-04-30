@@ -1,0 +1,312 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm,amssymb,amsmath}
+\usepackage{spverbatim}
+\usepackage{graphicx}
+
+\graphicspath{ {./images/} }
+\newtheorem*{theorem}{Theorem}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+
+
+\begin{document}
+	\begin{titlepage}
+		\newcommand{\HRule}{\rule{\linewidth}{1mm}} 
+		\noindent
+		{\large
+		\begin{minipage}{0.2\textwidth}
+				\begin{center} 
+					\includegraphics[width=0.7\textwidth]{unsa.jpg}
+				\end{center}
+			\end{minipage}
+			\begin{minipage}{0.58\textwidth}
+				\begin{center} \large
+					Univerzitet u Sarajevu\\
+					Elektrotehnički fakultet u Sarajevu\\
+					Odsjek za računarstvo i informatiku\\
+				\end{center}
+			\end{minipage}
+			\begin{minipage}{0.2\textwidth}
+				\begin{center} 
+					\includegraphics[width=0.7\textwidth]{ETF_logo.png}
+				\end{center}
+			\end{minipage}
+			\\[6 cm] 
+			\begin{minipage}{0.2\textwidth}
+				\begin{center} 
+					
+				\end{center}
+			\end{minipage}
+		
+			
+			
+			\begin{center}
+				\LARGE 
+				\textbf{Studentski dom} \\
+				\large 
+				\textbf{Objektno orjentisana analiza i dizajn}
+				\\
+				Dženana Huseinspahić, Esma Karahodža \\
+				i Dženeta Kudumović
+				\\[3.0 cm] 
+				
+			\end{center}	 		
+		}
+	\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\contentsname}{Sadržaj}
+\tableofcontents
+
+\newpage
+
+\section{Opis projekta}
+\hspace{\indent}Na svim većim univerzitetima širom svijeta veliki broj studenata živi u studentskim domovima. Namjena ovog softvera je da studentima olakša izvršavanje svakodnevnih aktivnosti u domu i da uposlenicima pomogne da što efikasnije izvršavaju neke od resursno zahtjevnih poslova i studentskih servisa. Na taj način se automatiziraju određeni procesi koji oduzimaju dosta vremena studentima i osoblju koje ih izvršava.
+
+\subsection*{Funkcionalnosti}
+\begin{itemize}
+  \item Prijem studenata u studentski dom – popunjavanje aplikacije, kontrola dokumentacije, odobravanje zahtjeva
+  \item Održavanje informacija o studenatima - lični podaci i osnovne informacije vezane za servise u studentskom domu
+  \item Dnevna rezervacija obroka u kuhinji od strane studenata
+  \item Prijava zahtjeva za tekućim održavanjem studentskih apartmana i zajedničkih prostorija
+  \item Upravljanje zahtjevima za održavanje – dodjela zadataka tehničkom osoblju, evidentiranje završetka poslova i izvještavanje
+  
+\end{itemize}
+
+\subsection*{Akteri}
+\begin{itemize}
+    \item Student
+    \item Uposlenik uprave
+    \item Šef kuhinje
+    \item Šef odjela tehničkog održavanja
+\end{itemize}
+
+
+\medskip 
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Klase}
+
+\subsection*{Student}
+\begin{itemize}
+  \item atributi 
+     \begin{itemize}
+        \item imeIPrezime: String
+        \item JMBG: String
+        \item adresaStanovanja: String
+        \item fakultet: String
+        \item godinaStudiranja: int
+        \item brojTelefona: int
+        \item brojSobe: int
+        \item email: String
+        \item brojIndeksa: int
+        \item brojBonova: int
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)Student(in s:String, in jmbg:String, in a:String, in f:String, in g:int, in br:int, in brS:int, in e:String, in i:int, in b:int)
+     \end{itemize}
+\end{itemize}
+
+\subsection*{StudentskiDom}
+\begin{itemize}
+  \item atributi 
+     \begin{itemize}
+        \item studenti: List<Student>
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)studentskiDom()
+        \item prijava(in student:Student): void
+        \item odjava(in student:Student): void
+     \end{itemize}
+\end{itemize}
+
+\subsection*{PrijavaObroka}
+\begin{itemize}
+  \item atributi 
+     \begin{itemize}
+        \item student: Student
+        \item rucak: Boolean
+        \item vecera: Boolean
+        \item zaPonijet: Boolean
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)prijavaObroka(in s:Student)
+        \item smanjiBonove(): void
+        \item dodajPrijavu(in s:Student): PrijavaObroka
+     \end{itemize}
+\end{itemize}
+
+\subsection*{PrijavaUDom}
+\begin{itemize}
+  \item atributi 
+     \begin{itemize}
+        \item student: Student
+        \item vrijemePrijave: Date
+
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)prijavaUDom(in s:Student, in d:Date)
+     \end{itemize}
+\end{itemize}
+
+\subsection*{PrijavaKvara}
+\begin{itemize}
+  \item atributi 
+     \begin{itemize}
+        \item student: Student
+        \item tipKvara: enum
+        \item opisKvara: String
+        \item vrijemeKvara: Date
+
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)prijavaKvara(in s:Student, in t:enum, in o:String, in v:Date)
+        \item dodajPrijavu(in s:Student): PrijavaKvara
+     \end{itemize}
+\end{itemize}
+
+\subsection*{UposlenikDoma}
+ 
+\begin{itemize}
+  \item interface
+  \item atributi
+     \begin{itemize}
+        \item imeIPrezime: String
+     \end{itemize}
+\end{itemize}
+ 
+\subsection*{SefKuhinje}
+ 
+\begin{itemize}
+  \item izvedena klasa iz klase UposlenikDoma
+  \item atributi
+     \begin{itemize}
+        \item obroci: List\(<\)PrijavaObroka\(>\)
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)sefKuhinje()
+        \item odobriPrijave(): void
+       
+     \end{itemize}
+ 
+\end{itemize}
+ 
+\subsection*{UposlenikUprave}
+ 
+\begin{itemize}
+  \item izvedena klasa iz klase UposlenikDoma
+  \item atributi
+     \begin{itemize}
+        \item prijave: List\(<\)PrijavaUDom\(>\)
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)uposlenikUprave(s: String)
+        \item odobriPrijavuUDom(prijava: PrijavaUDom): Boolean
+        \item promijeniPodatkeOStudentu(student: Student): void
+        \item unesiStudenta(student: Student): void
+       
+     \end{itemize}
+ 
+\end{itemize}
+ 
+\subsection*{SefTehnickogOdrzavanja}
+ 
+\begin{itemize}
+  \item izvedena klasa iz klase UposlenikDoma
+  \item atributi
+     \begin{itemize}
+        \item radnici: List\(<\)Radnik\(>\)
+        \item kvarovi: List\(<\)PrijavaKvara\(>\)
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)sefTehnickogOdrzavanja()
+        \item pronadjiRadnika(prijava: PrijavaKvara): PrijavaKvara
+       
+     \end{itemize}
+ 
+\end{itemize}
+ 
+ 
+ 
+\subsection*{Radnik}
+ 
+\begin{itemize}
+  \item izvedena klasa iz klase SefTehnickogOdrzavanja
+  \item atributi
+     \begin{itemize}
+        \item Usluga: enum
+        \item brojTelefona: int
+     \end{itemize}
+  \item metode
+  \begin{itemize}
+        \item \(<<\)create\(>>\)radnik(usluga: enum, brojTelefona: int)
+       
+     \end{itemize}
+ 
+\end{itemize}
+
+
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Solid principi}
+
+\subsection{Single Responsibility Principe} 
+
+\hspace{\indent}Princip S zahtijeva da svaka klasa ima samo jednu odgovornost, odnosno da klasa vrši samo jedan tip akcija kako ne bi ovisila o prevelikom broju konkretnih implementacija. 
+
+U ovom projektu princip S je ispoštovan jer svaka klasa vrši samo jednu vrstu akcija, npr. postoje tri različite klase za različite prijave umjesto jedne koja bi slala podatke svim klasama. 
+
+\subsection{Open/Closed Principle}
+
+\hspace{\indent}Princip O zahtijeva da klasa koja koristi neku drugu klasu ne treba biti modificirana pri uvođenju novih funkcionalnosti, ili pri potrebi za mijenjanjem druge klase.
+
+Vidimo da za sve klase na klasnom dijagramu vrijedi da možemo mijenjati okruženje oko klase bez promjene same klase. Npr. na našem klasnom dijagramu nijedna klasa me zavisi od neke druge klase na način da bi promjenom te druge klase morali modificirati i prvu.
+
+\subsection{Liskov Substitution Principle}
+
+\hspace{\indent}Princip L zahtijeva da nasljeđivanje bude ispravno implementirano, odnosno da je na svim mjestima na kojima se koristi osnovni objekat moguće iskoristiti i izvedeni objekat a da takvo nešto ima smisla.
+
+Liskov princip je ovdje zadovoljen jer se sve naslijeđene klase mogu zamijeniti svojim osnovnim tipom, npr. klasu šefKuhinje možemo zamijeniti klasom Uposlenik Doma bez da stvorimo konflikt. 
+
+\subsection{Interface Segregation Principle} 
+
+\hspace{\indent}Princip I zahtijeva da i svi interfejsi zadovoljavaju princip S, odnosno da svaki interfejs obavlja samo jednu vrstu akcija.
+
+Klasni dijagram sadrži samo jedan interfejs, UposlenikDoma. On obavlja samo jednu akciju a to je da povezuje tri vrste uposlenika doma. Zbog toga je i ovaj princip zadovoljen.
+
+
+
+\subsection{Dependency Inversion Principle}
+
+Princip D zahtijeva da pri nasljeđivanju od strane više klasa bazna klasa uvijek bude apstraktna. Razlog za ovo je što je teško koordinisati veliki broj naslijeđenih klasa i konkretnu baznu klasu ukoliko ista nije apstraktna, a da pritom kod bude čitak i jednostavan za razumijevanje.
+
+Ovaj projekat ne sadrži nijednu baznu klasu koja nije apstraktna i samim time je ovaj princim automatski ispunjen.
+
+\newpage
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{MVC}
+
+
+
+
+\end{document}
