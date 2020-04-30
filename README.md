@@ -12,8 +12,7 @@ Na svim većim univerzitetima širom svijeta veliki broj studenata živi u stude
 *	Prijem studenata u studentski dom – popunjavanje aplikacije, kontrola dokumentacije, odobravanje zahtjeva
 *	Održavanje informacija o studenatima - lični podaci i osnovne informacije vezane za servise u studentskom domu
 *	Dnevna rezervacija obroka u kuhinji od strane studenata
-*	Upravljanje pojedinačnim fondovima studentskih bonova na osnovu rezervacija
-*	Prijava zahtjeva za tekućim održavanjem inventara u studentskim apartmanima i zajedničkim prostorijama
+*	Prijava zahtjeva za tekućim održavanjem studentskih apartmana i zajedničkih prostorija
 *	Upravljanje zahtjevima za održavanje – dodjela zadataka tehničkom osoblju, evidentiranje završetka poslova i izvještavanje 
 
 
