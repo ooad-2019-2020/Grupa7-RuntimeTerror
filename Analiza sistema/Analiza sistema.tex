@@ -44,17 +44,40 @@
 		
 			
 			
-			\begin{center}
-				\LARGE 
-				\textbf{Studentski dom} \\
-				\large 
-				\textbf{Objektno orjentisana analiza i dizajn}
-				\\
-				Dženana Huseinspahić, Esma Karahodža \\
-				i Dženeta Kudumović
-				\\[3.0 cm] 
-				
-			\end{center}	 		
+
+
+\begin{center}
+	\vspace{0.1cm}
+	\Large \textbf{Projektni zadatak}
+	\vspace{0.1cm}
+\end{center}
+
+\rule{\textwidth}{0.1mm}
+
+\begin{center}
+	\vspace{0.1cm}
+	\LARGE \textbf{Studentski dom}
+	\vspace{0.3cm}
+\end{center}
+
+\rule{\textwidth}{0.1mm}
+
+\begin{center}
+    \textbf{Dženana Huseinspahić, Esma Karahodža, \\Dženeta Kudumović}\\
+   \textit{Objektno orjentisana analiza i dizajn}\\
+    Akademska godina: 2019/2020\\
+    \vspace{0.5cm}
+\end{center}
+
+%Sažetak
+
+
+\selectlanguage{croatian}
+
+\vfill
+\begin{center}
+	Sarajevo, maj 2020.
+\end{center}	 		
 		}
 	\end{titlepage}
 
@@ -301,7 +324,47 @@ Ovaj projekat ne sadrži nijednu baznu klasu koja nije apstraktna i samim time j
 
 \newpage
 
+\section{Paterni}
 
+\subsection{Strukturalni paterni}
+
+\subsubsection*{Proxy}
+\hspace{\indent}Proxy patern služi za dodatno osiguravanje objekata od pogrešne ili zlonamjerne upotrebe. Primjenom ovog paterna omogućava se kontrola pristupa objektima, te se onemogućava manipulacija objektima ukoliko neki uslov nije ispunjen, odnosno ukoliko korisnik nema prava pristupa traženom objektu.
+
+Proxy patern je korišten kako bi samo dređeni stanovnici mogli pristupati određenim dijelovima sistema, np. ne bi trebalo da šef kuhinje odobri prijave u dom ili da korisnik doma pristupi informacijama o drugom korisniku doma. U klasi Proxy svakom korisniku dodjeljujemo odgovarajući nivo pristupa, a zatim korisnik može pristupati odgovarajućim metodama iz klase IStudentskiDom.
+
+
+\subsubsection*{Composite}
+\hspace{\indent}Composite patern služi za kreiranje hijerarhije objekata. Koristi se kada svi objekti imaju različite implementacije nekih metoda, no potrebno im je svima pristupati na isti način, te se na taj način pojednostavljuje njihova implementacija.
+
+U našem projektu je postojala apstraktna klasa Prijava koja je zamijenjena interfejsom IPrijava koji su sve 3 vrste prijava naslijedile i tako je hijerarhija pojednostavljena.
+
+\subsection{Kreacijski paterni}
+
+\subsubsection*{Singleton}
+
+\hspace{\indent}Singleton patern služi kako bi se neka klasa mogla instancirati samo jednom. Na ovaj način može se omogućiti i tzv. lazy initialization, odnosno instantacija klase tek onda kada se to prvi
+put traži. Osim toga, osigurava se i globalni pristup jedinstvenoj instanci - svaki put kada joj
+se pokuša pristupiti, dobiti će se ista instanca klase. Ovo olakšava i kontrolu pristupa u slučaju
+kada je neophodno da postoji samo jedan objekat određenog tipa.
+
+U našem projektu singleton patern je iskorišten u klasi koja simulira bazu podataka i koja se kreira samo jednom.
+
+
+\subsubsection*{Builder}
+
+\hspace{\indent}Builder patern služi za apstrakciju procesa konstrukcije objekta, kako bi se kao rezultat
+mogle dobiti različite specifikacije objekta koristeći isti proces konstrukcije. Ovaj patern koristi
+se kako bi se izbjeglo kreiranje kompleksne hijerarhije klasa te kako bi se izbjegao kompleksni
+programski kod konstruktora jedne klase koja može imati različite konfiguracije atributa.
+Različiti dijelovi konstrukcije objekta izdvajaju se u posebne metode koje se zatim pozivaju
+različitim redoslijedom ili se poziv nekih dijelova izostavlja, kako bi se dobili željeni različiti
+podtipovi objekta bez potrebe za kreiranjem velikog broja podklasa.
+
+Builder paternt je ovdje iskorišten tako da se pri kreiranju studenta razlikuje prijava u kojoj student ima prijavu za cimeraj od studenta kome će se nasumično dodijeliti soba.
+
+
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{MVC}
