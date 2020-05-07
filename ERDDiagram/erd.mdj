@@ -1313,58 +1313,13 @@
 													"top": 105,
 													"width": 174,
 													"height": 13
-												},
-												{
-													"_type": "ERDColumnView",
-													"_id": "AAAAAAFx68pp8yIMI1U=",
-													"_parent": {
-														"$ref": "AAAAAAFx68BsnCHlE8w="
-													},
-													"model": {
-														"$ref": "AAAAAAFx68ppkiIJF8w="
-													},
-													"font": "Arial;13;0",
-													"left": 381,
-													"top": 120,
-													"width": 174,
-													"height": 13
-												},
-												{
-													"_type": "ERDColumnView",
-													"_id": "AAAAAAFx68sJLyIV/XM=",
-													"_parent": {
-														"$ref": "AAAAAAFx68BsnCHlE8w="
-													},
-													"model": {
-														"$ref": "AAAAAAFx68sIsyISK5I="
-													},
-													"font": "Arial;13;0",
-													"left": 381,
-													"top": 135,
-													"width": 174,
-													"height": 13
-												},
-												{
-													"_type": "ERDColumnView",
-													"_id": "AAAAAAFx680YiyIl4n4=",
-													"_parent": {
-														"$ref": "AAAAAAFx68BsnCHlE8w="
-													},
-													"model": {
-														"$ref": "AAAAAAFx680YLCIiW10="
-													},
-													"font": "Arial;13;0",
-													"left": 381,
-													"top": 150,
-													"width": 174,
-													"height": 13
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 376,
 											"top": 55,
 											"width": 184,
-											"height": 113
+											"height": 68
 										}
 									],
 									"font": "Arial;13;0",
@@ -2096,36 +2051,6 @@
 									},
 									"name": "sprat",
 									"type": "INTEGER"
-								},
-								{
-									"_type": "ERDColumn",
-									"_id": "AAAAAAFx68ppkiIJF8w=",
-									"_parent": {
-										"$ref": "AAAAAAFx68BsmyHheNg="
-									},
-									"name": "cimer1",
-									"type": "INTEGER",
-									"foreignKey": true
-								},
-								{
-									"_type": "ERDColumn",
-									"_id": "AAAAAAFx68sIsyISK5I=",
-									"_parent": {
-										"$ref": "AAAAAAFx68BsmyHheNg="
-									},
-									"name": "cimer2",
-									"type": "INTEGER",
-									"foreignKey": true
-								},
-								{
-									"_type": "ERDColumn",
-									"_id": "AAAAAAFx680YLCIiW10=",
-									"_parent": {
-										"$ref": "AAAAAAFx68BsmyHheNg="
-									},
-									"name": "cimer3",
-									"type": "INTEGER",
-									"foreignKey": true
 								}
 							]
 						}
