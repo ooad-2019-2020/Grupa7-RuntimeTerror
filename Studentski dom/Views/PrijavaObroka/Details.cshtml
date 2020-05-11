@@ -1,0 +1,48 @@
+﻿@model Studentski_dom.Models.PrijavaObroka
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PrijavaObroka</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Student)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Student.StudentID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rucak)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rucak)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Vecera)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Vecera)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZaPonijetRucak)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZaPonijetRucak)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZaPonijetVecera)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZaPonijetVecera)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.PrijavaObrokaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

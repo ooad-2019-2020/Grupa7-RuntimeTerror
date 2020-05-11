@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Studentski_dom.Models.PrijavaStudenta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImePrezime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JMBG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdresaStanovanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fakultet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GodinaStudiranja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CiklusStudija)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojIndeksa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojTelefona)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fotografija)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImePrezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JMBG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdresaStanovanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fakultet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GodinaStudiranja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CiklusStudija)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojIndeksa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojTelefona)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fotografija)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PrijavaStudentaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PrijavaStudentaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PrijavaStudentaID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
