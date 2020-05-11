@@ -11,6 +11,9 @@ namespace Studentski_dom.Controllers
 {
     public class RegistracijaStudentaController : Controller
     {
+        /// <summary>
+        /// test
+        /// </summary>
         private readonly NasContext _context;
 
         public RegistracijaStudentaController(NasContext context)
