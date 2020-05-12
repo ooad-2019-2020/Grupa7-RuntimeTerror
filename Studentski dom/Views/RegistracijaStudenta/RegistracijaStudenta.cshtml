@@ -1,0 +1,139 @@
+﻿@model Studentski_dom.Models.PrijavaStudenta
+
+@{
+    ViewData["Title"] = "RegistracijaStudenta";
+}
+
+<h1 align="center">Registracija</h1>
+
+<hr />
+<form asp-action="Create">
+    <table align="center">
+        <tr style="height:100px;">
+            <th colspan="2">Lični podaci</th>
+            <th colspan="2">Informacije o studiju</th>
+            <th colspan="2">Kontakt informacije</th>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="ImePrezime" class="control-label"></label>
+            </td>
+            <td width="220px">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group" style="width:200px">
+                            <input asp-for="ImePrezime" class="form-control" />
+                            <span asp-validation-for="ImePrezime" class="text-danger"></span>
+                        </div>
+            </td>
+            <td><label asp-for="Fakultet" class="control-label"></label></td>
+            <td width="220px">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="width: 200px">
+                    <input asp-for="Fakultet" class="form-control" />
+                    <span asp-validation-for="Fakultet" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <label asp-for="BrojTelefona" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="width:200px">
+                    <input asp-for="BrojTelefona" class="form-control" />
+                    <span asp-validation-for="BrojTelefona" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="JMBG" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="JMBG" class="form-control" />
+                    <span asp-validation-for="JMBG" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <label asp-for="GodinaStudiranja" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="GodinaStudiranja" class="form-control" />
+                    <span asp-validation-for="GodinaStudiranja" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <label asp-for="Email" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="AdresaStanovanja" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="AdresaStanovanja" class="form-control" />
+                    <span asp-validation-for="AdresaStanovanja" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <label asp-for="CiklusStudija" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="CiklusStudija" class="form-control" />
+                    <span asp-validation-for="CiklusStudija" class="text-danger"></span>
+                </div>
+            </td>
+            <td>
+                <label asp-for="Fotografija" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="Fotografija" class="form-control" />
+                    <span asp-validation-for="Fotografija" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <label asp-for="BrojIndeksa" class="control-label"></label>
+            </td>
+            <td>
+                        <div class="form-group" style="width:200px">
+                            <input asp-for="BrojIndeksa" class="form-control" />
+                            <span asp-validation-for="BrojIndeksa" class="text-danger"></span>
+                        </div>
+            </td>
+        </tr>
+
+        <tr style="height:100px">
+            <td></td>
+            <td></td>
+            <td colspan="2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="submit" value="Spremi" class="btn btn-primary" />
+                        </div>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+</table>
+</form>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

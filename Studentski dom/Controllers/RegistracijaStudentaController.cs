@@ -27,8 +27,8 @@ namespace Studentski_dom.Controllers
             return View(await _context.PrijavaStudenta.ToListAsync());
         }
 
-        // GET: RegistracijaStudenta/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: RegistracijaStudenta/PregledPrijaveUDom/5
+        public async Task<IActionResult> PregledPrijaveUDom(int? id)
         {
             if (id == null)
             {
@@ -45,8 +45,8 @@ namespace Studentski_dom.Controllers
             return View(prijavaStudenta);
         }
 
-        // GET: RegistracijaStudenta/Create
-        public IActionResult Create()
+        // GET: RegistracijaStudenta/RegistracijStudenta
+        public IActionResult RegistracijaStudenta()
         {
             return View();
         }
@@ -56,7 +56,7 @@ namespace Studentski_dom.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrijavaStudentaID,ImePrezime,JMBG,AdresaStanovanja,Fakultet,GodinaStudiranja,CiklusStudija,BrojIndeksa,BrojTelefona,Email,Fotografija")] PrijavaStudenta prijavaStudenta)
+        public async Task<IActionResult> RegistracijaStudenta([Bind("PrijavaStudentaID,ImePrezime,JMBG,AdresaStanovanja,Fakultet,GodinaStudiranja,CiklusStudija,BrojIndeksa,BrojTelefona,Email,Fotografija")] PrijavaStudenta prijavaStudenta)
         {
             if (ModelState.IsValid)
             {
