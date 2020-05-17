@@ -1,0 +1,44 @@
+#pocetna {
+  text-align: center;
+  padding: 40px;
+  /*background: url(../../assets/img/dom.jpg);*/
+  background: url(../../assets/img/dom.jpg);
+  background-size: cover;
+}
+
+#pocetna .jumbotron {
+  border-radius: 20px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+#podnaslov {
+  padding: 30px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+#donji {
+  padding: 40px;
+}
+
+#upis {
+  font-size: 40px;
+}
+
+#obrok {
+  font-size: 40px;
+  padding-top: 10px;
+}
+
+#podpodnaslov {
+  padding-bottom: 20px;
+  /*font-style: inherit;*/
+  font-weight: bold;
+}
+
+#dugme {
+  background-color: rgb(184,152,113);
+  border-color: rgb(184,152,113);
+}
+
