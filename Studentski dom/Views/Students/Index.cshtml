@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Studentski_dom.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Soba)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrojBonova)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrijavaStudenta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soba.SobaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrojBonova)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrijavaStudenta.PrijavaStudentaID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

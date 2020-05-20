@@ -16,5 +16,7 @@ namespace Studentski_dom.Models
         [Display(Name = "ID prijave u dom")]
         public int PrijavaStudentaID { get; set; }
         public virtual PrijavaStudenta PrijavaStudenta { get; set; }
+
+        public string ImePrezime { get { return PrijavaStudenta.ImePrezime; } }
     }
 }

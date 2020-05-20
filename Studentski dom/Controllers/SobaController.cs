@@ -9,23 +9,22 @@ using Studentski_dom.Models;
 
 namespace Studentski_dom.Controllers
 {
-    public class PrijavaKvaraController : Controller
+    public class SobaController : Controller
     {
         private readonly NasContext _context;
 
-        public PrijavaKvaraController(NasContext context)
+        public SobaController(NasContext context)
         {
             _context = context;
         }
 
-        // GET: PrijavaKvara
+        // GET: Soba
         public async Task<IActionResult> Index()
         {
-            var nasContext = _context.PrijavaKvara.Include(p => p.Student);
-            return View(await nasContext.ToListAsync());
+            return View(await _context.Soba.ToListAsync());
         }
 
-        // GET: PrijavaKvara/Details/5
+        // GET: Soba/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara
-                .Include(p => p.Student)
-                .FirstOrDefaultAsync(m => m.PrijavaKvaraID == id);
-            if (prijavaKvara == null)
+            var soba = await _context.Soba
+                .FirstOrDefaultAsync(m => m.SobaID == id);
+            if (soba == null)
             {
                 return NotFound();
             }
 
-            return View(prijavaKvara);
+            return View(soba);
         }
 
-        // GET: PrijavaKvara/Create
+        // GET: Soba/Create
         public IActionResult Create()
         {
-            ViewData["StudentID"] = new SelectList(_context.Student, "ID", "ImePrezime");
             return View();
         }
 
-        // POST: PrijavaKvara/Create
+        // POST: Soba/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
+        public async Task<IActionResult> Create([Bind("SobaID,BrojSobe,Zauzeta,Sprat")] Soba soba)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(prijavaKvara);
+                _context.Add(soba);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            return View(soba);
         }
 
-        // GET: PrijavaKvara/Edit/5
+        // GET: Soba/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara.FindAsync(id);
-            if (prijavaKvara == null)
+            var soba = await _context.Soba.FindAsync(id);
+            if (soba == null)
             {
                 return NotFound();
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            return View(soba);
         }
 
-        // POST: PrijavaKvara/Edit/5
+        // POST: Soba/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
+        public async Task<IActionResult> Edit(int id, [Bind("SobaID,BrojSobe,Zauzeta,Sprat")] Soba soba)
         {
-            if (id != prijavaKvara.PrijavaKvaraID)
+            if (id != soba.SobaID)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace Studentski_dom.Controllers
             {
                 try
                 {
-                    _context.Update(prijavaKvara);
+                    _context.Update(soba);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrijavaKvaraExists(prijavaKvara.PrijavaKvaraID))
+                    if (!SobaExists(soba.SobaID))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace Studentski_dom.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            return View(soba);
         }
 
-        // GET: PrijavaKvara/Delete/5
+        // GET: Soba/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara
-                .Include(p => p.Student)
-                .FirstOrDefaultAsync(m => m.PrijavaKvaraID == id);
-            if (prijavaKvara == null)
+            var soba = await _context.Soba
+                .FirstOrDefaultAsync(m => m.SobaID == id);
+            if (soba == null)
             {
                 return NotFound();
             }
 
-            return View(prijavaKvara);
+            return View(soba);
         }
 
-        // POST: PrijavaKvara/Delete/5
+        // POST: Soba/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var prijavaKvara = await _context.PrijavaKvara.FindAsync(id);
-            _context.PrijavaKvara.Remove(prijavaKvara);
+            var soba = await _context.Soba.FindAsync(id);
+            _context.Soba.Remove(soba);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PrijavaKvaraExists(int id)
+        private bool SobaExists(int id)
         {
-            return _context.PrijavaKvara.Any(e => e.PrijavaKvaraID == id);
+            return _context.Soba.Any(e => e.SobaID == id);
         }
     }
 }

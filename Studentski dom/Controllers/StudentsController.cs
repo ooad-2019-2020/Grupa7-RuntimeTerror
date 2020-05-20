@@ -9,23 +9,23 @@ using Studentski_dom.Models;
 
 namespace Studentski_dom.Controllers
 {
-    public class PrijavaKvaraController : Controller
+    public class StudentsController : Controller
     {
         private readonly NasContext _context;
 
-        public PrijavaKvaraController(NasContext context)
+        public StudentsController(NasContext context)
         {
             _context = context;
         }
 
-        // GET: PrijavaKvara
+        // GET: Students
         public async Task<IActionResult> Index()
         {
-            var nasContext = _context.PrijavaKvara.Include(p => p.Student);
+            var nasContext = _context.Student.Include(s => s.PrijavaStudenta).Include(s => s.Soba);
             return View(await nasContext.ToListAsync());
         }
 
-        // GET: PrijavaKvara/Details/5
+        // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +33,45 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara
-                .Include(p => p.Student)
-                .FirstOrDefaultAsync(m => m.PrijavaKvaraID == id);
-            if (prijavaKvara == null)
+            var student = await _context.Student
+                .Include(s => s.PrijavaStudenta)
+                .Include(s => s.Soba)
+                .FirstOrDefaultAsync(m => m.StudentID == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(prijavaKvara);
+            return View(student);
         }
 
-        // GET: PrijavaKvara/Create
+        // GET: Students/Create
         public IActionResult Create()
         {
-            ViewData["StudentID"] = new SelectList(_context.Student, "ID", "ImePrezime");
+            ViewData["PrijavaStudentaID"] = new SelectList(_context.PrijavaStudenta, "PrijavaStudentaID", "PrijavaStudentaID");
+            ViewData["SobaID"] = new SelectList(_context.Soba, "SobaID", "SobaID");
             return View();
         }
 
-        // POST: PrijavaKvara/Create
+        // POST: Students/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
+        public async Task<IActionResult> Create([Bind("StudentID,SobaID,BrojBonova,PrijavaStudentaID")] Student student)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(prijavaKvara);
+                _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            ViewData["PrijavaStudentaID"] = new SelectList(_context.PrijavaStudenta, "PrijavaStudentaID", "PrijavaStudentaID", student.PrijavaStudentaID);
+            ViewData["SobaID"] = new SelectList(_context.Soba, "SobaID", "SobaID", student.SobaID);
+            return View(student);
         }
 
-        // GET: PrijavaKvara/Edit/5
+        // GET: Students/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +79,24 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara.FindAsync(id);
-            if (prijavaKvara == null)
+            var student = await _context.Student.FindAsync(id);
+            if (student == null)
             {
                 return NotFound();
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            ViewData["PrijavaStudentaID"] = new SelectList(_context.PrijavaStudenta, "PrijavaStudentaID", "PrijavaStudentaID", student.PrijavaStudentaID);
+            ViewData["SobaID"] = new SelectList(_context.Soba, "SobaID", "SobaID", student.SobaID);
+            return View(student);
         }
 
-        // POST: PrijavaKvara/Edit/5
+        // POST: Students/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
+        public async Task<IActionResult> Edit(int id, [Bind("StudentID,SobaID,BrojBonova,PrijavaStudentaID")] Student student)
         {
-            if (id != prijavaKvara.PrijavaKvaraID)
+            if (id != student.StudentID)
             {
                 return NotFound();
             }
@@ -101,12 +105,12 @@ namespace Studentski_dom.Controllers
             {
                 try
                 {
-                    _context.Update(prijavaKvara);
+                    _context.Update(student);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PrijavaKvaraExists(prijavaKvara.PrijavaKvaraID))
+                    if (!StudentExists(student.StudentID))
                     {
                         return NotFound();
                     }
@@ -117,11 +121,12 @@ namespace Studentski_dom.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
-            return View(prijavaKvara);
+            ViewData["PrijavaStudentaID"] = new SelectList(_context.PrijavaStudenta, "PrijavaStudentaID", "PrijavaStudentaID", student.PrijavaStudentaID);
+            ViewData["SobaID"] = new SelectList(_context.Soba, "SobaID", "SobaID", student.SobaID);
+            return View(student);
         }
 
-        // GET: PrijavaKvara/Delete/5
+        // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +134,32 @@ namespace Studentski_dom.Controllers
                 return NotFound();
             }
 
-            var prijavaKvara = await _context.PrijavaKvara
-                .Include(p => p.Student)
-                .FirstOrDefaultAsync(m => m.PrijavaKvaraID == id);
-            if (prijavaKvara == null)
+            var student = await _context.Student
+                .Include(s => s.PrijavaStudenta)
+                .Include(s => s.Soba)
+                .FirstOrDefaultAsync(m => m.StudentID == id);
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return View(prijavaKvara);
+            return View(student);
         }
 
-        // POST: PrijavaKvara/Delete/5
+        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var prijavaKvara = await _context.PrijavaKvara.FindAsync(id);
-            _context.PrijavaKvara.Remove(prijavaKvara);
+            var student = await _context.Student.FindAsync(id);
+            _context.Student.Remove(student);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PrijavaKvaraExists(int id)
+        private bool StudentExists(int id)
         {
-            return _context.PrijavaKvara.Any(e => e.PrijavaKvaraID == id);
+            return _context.Student.Any(e => e.StudentID == id);
         }
     }
 }
