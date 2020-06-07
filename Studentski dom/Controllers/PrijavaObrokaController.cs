@@ -12,7 +12,7 @@ namespace Studentski_dom.Controllers
     public class PrijavaObrokaController : Controller
     {
         private readonly NasContext _context;
-
+       
         public PrijavaObrokaController(NasContext context)
         {
             _context = context;
@@ -22,6 +22,29 @@ namespace Studentski_dom.Controllers
         public async Task<IActionResult> Index()
         {
             var nasContext = _context.PrijavaObroka.Include(p => p.Student);
+            int brojacRucak = (from row in _context.PrijavaObroka
+                               where row.Rucak == true
+                               select row).Count();
+
+            ViewBag.brojacRucak = brojacRucak;
+
+            int brojacVecera = (from row in _context.PrijavaObroka
+                                where row.Vecera == true
+                                select row).Count();
+
+            ViewBag.brojacVecera = brojacVecera;
+
+            int rucakPonijeti = (from row in _context.PrijavaObroka
+                                 where row.ZaPonijetRucak == true
+                                 select row).Count();
+
+            ViewBag.rucakPonijeti = rucakPonijeti;
+
+            int veceraPonijeti = (from row in _context.PrijavaObroka
+                                  where row.ZaPonijetVecera == true
+                                  select row).Count();
+
+            ViewBag.veceraPonijeti = veceraPonijeti;
             return View(await nasContext.ToListAsync());
         }
 
@@ -122,16 +145,9 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: PrijavaObroka/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var prijavaObroka = await _context.PrijavaObroka
-                .Include(p => p.Student)
-                .FirstOrDefaultAsync(m => m.PrijavaObrokaID == id);
+            var prijavaObroka = (from row in _context.PrijavaObroka select row).First();
             if (prijavaObroka == null)
             {
                 return NotFound();
@@ -143,17 +159,24 @@ namespace Studentski_dom.Controllers
         // POST: PrijavaObroka/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed()
         {
-            var prijavaObroka = await _context.PrijavaObroka.FindAsync(id);
-            _context.PrijavaObroka.Remove(prijavaObroka);
-            await _context.SaveChangesAsync();
+            var brojac = (from row in _context.PrijavaObroka select row).Count();
+            if (brojac == 0) return RedirectToAction(nameof(Index));
+            for (int i = 0; i < brojac; i++)
+            {
+                var prijavaObroka = (from row in _context.PrijavaObroka select row).First();
+                _context.PrijavaObroka.Remove(prijavaObroka);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
+
         }
 
         private bool PrijavaObrokaExists(int id)
         {
             return _context.PrijavaObroka.Any(e => e.PrijavaObrokaID == id);
         }
+
     }
 }
