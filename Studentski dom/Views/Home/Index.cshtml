@@ -27,12 +27,12 @@
             }
             @if (User.IsInRole("Šef kuhinje"))
             {
-                <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme3" style="background-color: rgb(184,152,113);">Pregled prijava obroka</a></p>
+                <p><a asp-action="Index" asp-controller="PrijavaObroka" class="btn btn-primary" role="button" id="dugme3" style="background-color: rgb(184,152,113);">Pregled prijava obroka</a></p>
 
             }
             @if (User.IsInRole("Šef tehničkog održavanja"))
             {
-                <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme4" style="background-color: rgb(184,152,113);">Pregled prijava kvarova</a></p>
+                <p><a asp-action="Index" asp-controller="PrijavaKvara" class="btn btn-primary" role="button" id="dugme4" style="background-color: rgb(184,152,113);">Pregled prijava kvarova</a></p>
 
             }
         </div>
