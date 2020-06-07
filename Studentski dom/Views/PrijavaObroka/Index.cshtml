@@ -4,12 +4,14 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Pregled prijava obroka</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
+    
+
     <thead>
         <tr>
             <th>
@@ -30,8 +32,10 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Student.StudentID)
@@ -48,12 +52,36 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ZaPonijetVecera)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrijavaObrokaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrijavaObrokaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrijavaObrokaID">Delete</a>
-            </td>
+            <!--
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.PrijavaObrokaID">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.PrijavaObrokaID">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.PrijavaObrokaID">Delete</a>
+    </td>-->
         </tr>
-}
+        }
     </tbody>
+    <thead>
+    <tr>
+        <th>
+            <h3>Ukupno</h3>
+        </th>
+        <th>
+            <h3>@ViewBag.brojacRucak</h3>
+        </th>
+        <th>
+            <h3>@ViewBag.brojacVecera</h3>
+        </th>
+        <th>
+            <h3>@ViewBag.rucakPonijeti</h3>
+        </th>
+        <th>
+            <h3>@ViewBag.veceraPonijeti</h3>
+        </th>
+        <th>
+            <a asp-action="Delete" >Obriši sve</a>
+           
+        </th>
+    </tr>
+</thead>
 </table>
