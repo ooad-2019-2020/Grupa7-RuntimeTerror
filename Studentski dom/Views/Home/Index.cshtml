@@ -20,6 +20,21 @@
             <h1>Dobrodošli na stranicu studentskog doma!<br></h1>
             <p><br>Više od 50 godina njegujemo tradiciju i pružamo usluge studentima iz cijele Bosne i Hercegovine. Postanite i Vi član doma!<br><br></p>
             <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme" style="background-color: rgb(184,152,113);">Registruj se</a></p>
+            @if (User.IsInRole("Uposlenik uprave"))
+            {
+                <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme2" style="background-color: rgb(184,152,113);">Moj profil</a></p>
+
+            }
+            @if (User.IsInRole("Šef kuhinje"))
+            {
+                <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme3" style="background-color: rgb(184,152,113);">Pregled prijava obroka</a></p>
+
+            }
+            @if (User.IsInRole("Šef tehničkog održavanja"))
+            {
+                <p><a asp-action="RegistracijaStudenta" asp-controller="RegistracijaStudenta" class="btn btn-primary" role="button" id="dugme4" style="background-color: rgb(184,152,113);">Pregled prijava kvarova</a></p>
+
+            }
         </div>
     </div>
     <div id="donji" style="background-color: #e1ccbc;">
