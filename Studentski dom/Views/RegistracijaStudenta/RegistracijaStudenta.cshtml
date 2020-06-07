@@ -4,6 +4,8 @@
     ViewData["Title"] = "RegistracijaStudenta";
 }
 
+
+
 <h1 align="center">Registracija</h1>
 
 <hr />
@@ -19,17 +21,44 @@
                 <label asp-for="ImePrezime" class="control-label"></label>
             </td>
             <td width="220px">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group" style="width:200px">
-                            <input asp-for="ImePrezime" class="form-control" />
-                            <span asp-validation-for="ImePrezime" class="text-danger"></span>
-                        </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="width:200px">
+                    <input asp-for="ImePrezime" class="form-control" />
+                    <span asp-validation-for="ImePrezime" class="text-danger"></span>
+                </div>
             </td>
             <td><label asp-for="Fakultet" class="control-label"></label></td>
             <td width="220px">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group" style="width: 200px">
-                    <input asp-for="Fakultet" class="form-control" />
+                    <select class="form-control" id="Fakultet" name="Fakultet">
+                        <option></option>
+                        <option>Akademija likovnih umjetnosti</option>
+                        <option>Akademija scenskih umjetnosti</option>
+                        <option>Arhitektonski fakultet</option>
+                        <option>Ekonomski fakultet</option>
+                        <option>Elektrotehnički fakultet</option>
+                        <option>Fakultet za kriminalistiku, kriminologiju i sigurnosne studije</option>
+                        <option>Fakultet političkih nauka</option>
+                        <option>Fakultet sporta i tjelesnog odgoja</option>
+                        <option>Fakultet za saobraćaj i komunikacije</option>
+                        <option>Fakultet zdravstvenih studija</option>
+                        <option>Farmaceutski fakultet</option>
+                        <option>Filozofski fakultet</option>
+                        <option>Građevinski fakultet</option>
+                        <option>Mašinski fakultet</option>
+                        <option>Medicinski fakultet</option>
+                        <option>Muzička akademija</option>
+                        <option>Pedagoški fakultet</option>
+                        <option>Poljoprivredno - prehrambeni fakultet</option>
+                        <option>Pravni fakultet</option>
+                        <option>Prirodno-matematički fakultet fakultet</option>
+                        <option>Stomatološki fakultet</option>
+                        <option>Šumarski fakultet</option>
+                        <option>Veterinarski fakultet</option>
+                        <option>Fakultet islamskih nauka</option>
+                        <option>Katolički bogoslovni fakultet</option>
+                    </select>
                     <span asp-validation-for="Fakultet" class="text-danger"></span>
                 </div>
             </td>
@@ -59,7 +88,15 @@
             </td>
             <td width="220px">
                 <div class="form-group" style="width:200px">
-                    <input asp-for="GodinaStudiranja" class="form-control" />
+                    <select class="form-control" id="GodinaStudiranja" name="GodinaStudiranja">
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
                     <span asp-validation-for="GodinaStudiranja" class="text-danger"></span>
                 </div>
             </td>
@@ -88,7 +125,12 @@
             </td>
             <td width="220px">
                 <div class="form-group" style="width:200px">
-                    <input asp-for="CiklusStudija" class="form-control" />
+                    <select class="form-control" id="CiklusStudija" name="CiklusStudija">
+                        <option></option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
                     <span asp-validation-for="CiklusStudija" class="text-danger"></span>
                 </div>
             </td>
@@ -109,10 +151,10 @@
                 <label asp-for="BrojIndeksa" class="control-label"></label>
             </td>
             <td>
-                        <div class="form-group" style="width:200px">
-                            <input asp-for="BrojIndeksa" class="form-control" />
-                            <span asp-validation-for="BrojIndeksa" class="text-danger"></span>
-                        </div>
+                <div class="form-group" style="width:200px">
+                    <input asp-for="BrojIndeksa" class="form-control" />
+                    <span asp-validation-for="BrojIndeksa" class="text-danger"></span>
+                </div>
             </td>
         </tr>
 
@@ -127,12 +169,12 @@
             <td></td>
             <td></td>
         </tr>
-</table>
+    </table>
 </form>
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

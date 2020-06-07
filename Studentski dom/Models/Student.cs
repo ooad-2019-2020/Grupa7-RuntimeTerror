@@ -19,4 +19,6 @@ namespace Studentski_dom.Models
 
         public string ImePrezime { get { return PrijavaStudenta.ImePrezime; } }
     }
+
+
 }
