@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +12,6 @@ namespace Studentski_dom.Controllers
 {
     public class RegistracijaStudentaController : Controller
     {
-        /// <summary>
-        /// test
-        /// </summary>
         private readonly NasContext _context;
 
         public RegistracijaStudentaController(NasContext context)
@@ -22,12 +20,14 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: RegistracijaStudenta
+        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.PrijavaStudenta.ToListAsync());
         }
 
-        // GET: RegistracijaStudenta/PregledPrijaveUDom/5
+        // GET: RegistracijaStudenta/5
+        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> PregledPrijaveUDom(int? id)
         {
             if (id == null)
@@ -68,6 +68,7 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: RegistracijaStudenta/Edit/5
+        [Authorize(Roles ="Uposlenik uprave")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,6 +120,7 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: RegistracijaStudenta/Delete/5
+        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
