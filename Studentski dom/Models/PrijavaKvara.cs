@@ -19,7 +19,7 @@ namespace Studentski_dom.Models
         public DateTime VrijemePrijave { get; set; }
 
         [Display(Name = "Riješeno")]
-        public bool Rijeseno { get; set; } = false;
+        public bool Rijeseno { get; set; }
         [Display(Name = "Hitan kvar")]
         public bool HitanKvar { get; set; }
     }

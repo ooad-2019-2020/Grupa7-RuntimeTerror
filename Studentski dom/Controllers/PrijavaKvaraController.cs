@@ -90,7 +90,7 @@ namespace Studentski_dom.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
+        public async Task<IActionResult> Edit(int id, [Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar,Rijeseno")] PrijavaKvara prijavaKvara)
         {
             if (id != prijavaKvara.PrijavaKvaraID)
             {
