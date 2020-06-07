@@ -47,7 +47,7 @@ namespace Studentski_dom.Controllers
         // GET: PrijavaKvara/Create
         public IActionResult Create()
         {
-            ViewData["StudentID"] = new SelectList(_context.Student, "ID", "ImePrezime");
+            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID");
             return View();
         }
 

@@ -33,14 +33,14 @@
                 <input asp-for="VrijemePrijave" class="form-control" />
                 <span asp-validation-for="VrijemePrijave" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VrijemeRjesenja" class="control-label"></label>
-                <input asp-for="VrijemeRjesenja" class="form-control" />
-                <span asp-validation-for="VrijemeRjesenja" class="text-danger"></span>
-            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="HitanKvar" /> @Html.DisplayNameFor(model => model.HitanKvar)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Rijeseno" /> @Html.DisplayNameFor(model => model.Rijeseno)
                 </label>
             </div>
             <div class="form-group">

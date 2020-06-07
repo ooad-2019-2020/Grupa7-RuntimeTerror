@@ -17,7 +17,7 @@ namespace Studentski_dom.Models
         public int PrijavaStudentaID { get; set; }
         public virtual PrijavaStudenta PrijavaStudenta { get; set; }
 
-        public string ImePrezime { get { return PrijavaStudenta.ImePrezime; } }
+        public string ImePrezime => PrijavaStudenta.ImePrezime;
     }
 
 

@@ -17,8 +17,9 @@ namespace Studentski_dom.Models
         public string OpisKvara { get; set; }
         [Display(Name = "Vrijeme prijave")]
         public DateTime VrijemePrijave { get; set; }
-        [Display(Name = "Vrijeme rjesenja")]
-        public DateTime VrijemeRjesenja { get; set; }
+
+        [Display(Name = "Riješeno")]
+        public bool Rijeseno { get; set; } = false;
         [Display(Name = "Hitan kvar")]
         public bool HitanKvar { get; set; }
     }
