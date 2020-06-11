@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Studentski_dom.Models;
 
 namespace Studentski_dom.Controllers
@@ -12,16 +15,28 @@ namespace Studentski_dom.Controllers
     public class PrijavaKvaraController : Controller
     {
         private readonly NasContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<Korisnik> _userManager;
 
-        public PrijavaKvaraController(NasContext context)
+        public PrijavaKvaraController(NasContext context, IHttpContextAccessor httpContextAccessor, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         // GET: PrijavaKvara
         public async Task<IActionResult> Index()
         {
-            var nasContext = _context.PrijavaKvara.Include(p => p.Student);
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+
+            var nasContext = _context.PrijavaKvara.Include(p => p.Student)
+                .Where(p => (p.createdByUserId == userFromDatabase.Id
+                && p.StudentID == userFromDatabase.StudentId) 
+                || userFromDatabase.UserName == "uposlenikuprave@gmail.com" 
+                || userFromDatabase.UserName == "seftehnickogodrzavanja@gmail.com");
+
             return View(await nasContext.ToListAsync());
         }
 
@@ -45,9 +60,16 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: PrijavaKvara/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID");
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+
+            var nasContext = _context.Student
+                .Where(p => p.StudentID == userFromDatabase.StudentId);
+            ViewData["StudentID"] = new SelectList(nasContext, "StudentID", "StudentID");
+            //ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID");
+            
             return View();
         }
 
@@ -58,12 +80,20 @@ namespace Studentski_dom.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PrijavaKvaraID,StudentID,TipKvara,OpisKvara,VrijemePrijave,VrijemeRjesenja,HitanKvar")] PrijavaKvara prijavaKvara)
         {
+            
             if (ModelState.IsValid)
             {
+                var user = _httpContextAccessor.HttpContext.User;
+                var userFromDatabase = await _userManager.GetUserAsync(user);
+                if (userFromDatabase != null 
+                    && userFromDatabase.StudentId == prijavaKvara.StudentID)
+                    prijavaKvara.createdByUserId = userFromDatabase.Id;
+
                 _context.Add(prijavaKvara);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID", prijavaKvara.StudentID);
             return View(prijavaKvara);
         }

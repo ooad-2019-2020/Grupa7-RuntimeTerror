@@ -6,22 +6,46 @@
 
 
 
-<h4>PrijavaKvara</h4>
+<h4>Prijava kvara</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PrijavaKvaraID" />
+            <div class="form-group">
+                <label asp-for="StudentID" class="control-label"></label>
+                <select asp-for="StudentID" class="form-control" asp-items="ViewBag.StudentID"></select>
+                <span asp-validation-for="StudentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipKvara" class="control-label"></label>
+                <input asp-for="TipKvara" class="form-control" />
+                <span asp-validation-for="TipKvara" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisKvara" class="control-label"></label>
+                <input asp-for="OpisKvara" class="form-control" />
+                <span asp-validation-for="OpisKvara" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VrijemePrijave" class="control-label"></label>
+                <input asp-for="VrijemePrijave" class="form-control" />
+                <span asp-validation-for="VrijemePrijave" class="text-danger"></span>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="HitanKvar" /> @Html.DisplayNameFor(model => model.HitanKvar)
                 </label>
             </div>
+            @if (User.IsInRole("Šef tehničkog održavanja"))
+            {
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Rijeseno" /> @Html.DisplayNameFor(model => model.Rijeseno)
                 </label>
             </div>
+            }
             <div class="form-group">
                 <input type="submit" value="Sačuvaj" class="btn btn-primary" />
             </div>

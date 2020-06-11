@@ -6,82 +6,97 @@
 
 <h1>Pregled prijava obroka</h1>
 
-<p>
+<!--<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>-->
+
+<body background="css/assets/img/pozadina1.jpg">
+</body>
 <table class="table">
-    
+
 
     <thead>
         <tr>
+            @if (User.IsInRole("Uposlenik uprave") || User.IsInRole("Šef kuhinje"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Student.StudentID)
+                </th>
+            }
             <th>
-                @Html.DisplayNameFor(model => model.Student)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rucak)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vecera)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZaPonijetRucak)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ZaPonijetVecera)
-            </th>
-            <th></th>
-        </tr>
+                    @Html.DisplayNameFor(model => model.Rucak)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Vecera)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ZaPonijetRucak)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ZaPonijetVecera)
+                </th>
+                <th></th>
+            </tr>
     </thead>
 
     <tbody>
         @foreach (var item in Model)
         {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.StudentID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rucak)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vecera)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZaPonijetRucak)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZaPonijetVecera)
-            </td>
-            <!--
-    <td>
-        <a asp-action="Edit" asp-route-id="@item.PrijavaObrokaID">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.PrijavaObrokaID">Details</a> |
-        <a asp-action="Delete" asp-route-id="@item.PrijavaObrokaID">Delete</a>
-    </td>-->
-        </tr>
+            @if (User.IsInRole("Uposlenik uprave") || User.IsInRole("Šef kuhinje"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.StudentID)
+                </td>
+            }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rucak)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vecera)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZaPonijetRucak)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ZaPonijetVecera)
+                </td>
+                <!--
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.PrijavaObrokaID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.PrijavaObrokaID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.PrijavaObrokaID">Delete</a>
+        </td>-->
+            </tr>
         }
     </tbody>
+    @if (User.IsInRole("Šef kuhinje"))
+    {
     <thead>
-    <tr>
-        <th>
-            <h3>Ukupno</h3>
-        </th>
-        <th>
-            <h3>@ViewBag.brojacRucak</h3>
-        </th>
-        <th>
-            <h3>@ViewBag.brojacVecera</h3>
-        </th>
-        <th>
-            <h3>@ViewBag.rucakPonijeti</h3>
-        </th>
-        <th>
-            <h3>@ViewBag.veceraPonijeti</h3>
-        </th>
-        <th>
-            <a asp-action="Delete" >Obriši sve</a>
-           
-        </th>
-    </tr>
-</thead>
+        <tr>
+            @if ((User.IsInRole("Šef kuhinje")))
+            {
+                <th>
+                    <h3>Ukupno</h3>
+                </th>
+            <th>
+                <h3>@ViewBag.brojacRucak</h3>
+            </th>
+            <th>
+                <h3>@ViewBag.brojacVecera</h3>
+            </th>
+            <th>
+                <h3>@ViewBag.rucakPonijeti</h3>
+            </th>
+            <th>
+                <h3>@ViewBag.veceraPonijeti</h3>
+            </th>
+            <th>
+                <a asp-action="Delete">Obriši sve</a>
+
+            </th>
+            }
+        </tr>
+    </thead>
+    }
 </table>

@@ -22,5 +22,7 @@ namespace Studentski_dom.Models
         public bool Rijeseno { get; set; }
         [Display(Name = "Hitan kvar")]
         public bool HitanKvar { get; set; }
+
+        public string createdByUserId { get; set; }
     }
 }

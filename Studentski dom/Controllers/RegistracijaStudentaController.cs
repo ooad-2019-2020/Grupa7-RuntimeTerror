@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,23 +15,34 @@ namespace Studentski_dom.Controllers
     public class RegistracijaStudentaController : Controller
     {
         private readonly NasContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<Korisnik> _userManager;
 
-        public RegistracijaStudentaController(NasContext context)
+        public RegistracijaStudentaController(NasContext context, IHttpContextAccessor httpContextAccessor, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         // GET: RegistracijaStudenta
-        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PrijavaStudenta.ToListAsync());
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+            if (userFromDatabase != null && userFromDatabase.StudentId == 0)
+                return View(await _context.PrijavaStudenta.ToListAsync());
+            return View("~/Views/Home/Index.cshtml");
+
         }
 
         // GET: RegistracijaStudenta/5
-        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> PregledPrijaveUDom(int? id)
         {
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+            if (userFromDatabase != null && id == null) id = userFromDatabase.StudentId;
+
             if (id == null)
             {
                 return NotFound();
@@ -64,13 +77,18 @@ namespace Studentski_dom.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             return View(prijavaStudenta);
         }
 
         // GET: RegistracijaStudenta/Edit/5
-        [Authorize(Roles ="Uposlenik uprave")]
+       
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+            if (userFromDatabase != null && id == null) id = userFromDatabase.StudentId;
+
             if (id == null)
             {
                 return NotFound();
@@ -123,6 +141,7 @@ namespace Studentski_dom.Controllers
         [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -141,6 +160,7 @@ namespace Studentski_dom.Controllers
         // POST: RegistracijaStudenta/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Uposlenik uprave")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var prijavaStudenta = await _context.PrijavaStudenta.FindAsync(id);

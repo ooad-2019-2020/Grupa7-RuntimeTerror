@@ -4,8 +4,9 @@
     ViewData["Title"] = "PregledPrijaveUDom";
 }
 
-<h1>Prijava u dom</h1>
-
+<h1>Pregled podataka</h1>
+<body background="css/assets/img/pozadina1.jpg">
+</body>
 <div>
     <hr />
     <dl class="row">
@@ -75,6 +76,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.PrijavaStudentaID">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.PrijavaStudentaID">Izmijeni</a> |
+    @if (User.IsInRole("Uposlenik uprave"))
+    {
     <a asp-action="Index">Back to List</a>
+    }
 </div>

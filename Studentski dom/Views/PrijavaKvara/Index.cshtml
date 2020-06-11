@@ -4,17 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Pregled prijava kvara</h1>
-
+<h1>Pregled prijava kvarova</h1>
+<!--
 <p>
-    
-</p>
+    <a asp-action="Create">Create New</a>
+</p>-->
 <table class="table">
     <thead>
         <tr>
+            @if (User.IsInRole("Uposlenik uprave") || User.IsInRole("Šef tehničkog održavanja"))
+            {
             <th>
-                @Html.DisplayNameFor(model => model.Student)
+                @Html.DisplayNameFor(model => model.Student.StudentID)
             </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.TipKvara)
             </th>
@@ -34,11 +37,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.PrijavaStudenta.ImePrezime)
-            </td>
+            @if (User.IsInRole("Uposlenik uprave") || User.IsInRole("Šef tehničkog održavanja"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Student.StudentID)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.TipKvara)
             </td>
@@ -54,12 +61,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Rijeseno)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrijavaKvaraID">Promijeni</a> |
-               
-                <a asp-action="Delete" asp-route-id="@item.PrijavaKvaraID">Obriši</a>
-            </td>
+            @if (User.IsInRole("Šef tehničkog održavanja"))
+            {
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.PrijavaKvaraID">Izmijeni</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PrijavaKvaraID">Obriši</a>
+                </td>
+            }
         </tr>
-}
+        }
     </tbody>
 </table>

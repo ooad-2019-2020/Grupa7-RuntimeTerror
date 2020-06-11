@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Studentski_dom.Models;
 
 namespace Studentski_dom.Migrations
 {
     [DbContext(typeof(NasContext))]
-    partial class NasContextModelSnapshot : ModelSnapshot
+    [Migration("20200610121842_CreatedByPrijavaObroka")]
+    partial class CreatedByPrijavaObroka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

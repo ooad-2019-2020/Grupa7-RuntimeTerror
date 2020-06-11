@@ -5,10 +5,19 @@
 }
 
 <h1 align="center">Pregled prijava u dom</h1>
-
+<body background="css/assets/img/pozadina1.jpg">
+</body>
+<!--
 <p>
     <a asp-action="RegistracijaStudenta">Create New</a>
 </p>
+-->
+@if (User.IsInRole("Uposlenik uprave"))
+{
+<p>
+    <a asp-action="Create" asp-controller="Students">Kreiraj studenta</a>
+ </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -24,7 +33,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Fakultet)
             </th>
-            <th>
+ <!--           <th>
                 @Html.DisplayNameFor(model => model.GodinaStudiranja)
             </th>
             <th>
@@ -33,13 +42,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.BrojIndeksa)
             </th>
+            -->
             <th>
                 @Html.DisplayNameFor(model => model.BrojTelefona)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-          
+
             <th></th>
         </tr>
     </thead>
@@ -58,7 +68,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Fakultet)
             </td>
-            <td>
+     <!--       <td>
                 @Html.DisplayFor(modelItem => item.GodinaStudiranja)
             </td>
             <td>
@@ -67,17 +77,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BrojIndeksa)
             </td>
-            <td>
+       -->     <td>
                 @Html.DisplayFor(modelItem => item.BrojTelefona)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
+            </td> 
           
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PrijavaStudentaID">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.PrijavaStudentaID">Uredi</a> |
                 <a asp-action="PregledPrijaveUDom" asp-route-id="@item.PrijavaStudentaID">Pogledaj prijavu</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrijavaStudentaID">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.PrijavaStudentaID">Izbriši</a>
             </td>
         </tr>
 }

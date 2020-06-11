@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Studentski_dom.Models;
 
 namespace Studentski_dom.Migrations
 {
     [DbContext(typeof(NasContext))]
-    partial class NasContextModelSnapshot : ModelSnapshot
+    [Migration("20200610100004_CreatedByPrijavaKvara")]
+    partial class CreatedByPrijavaKvara
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +77,6 @@ namespace Studentski_dom.Migrations
 
                     b.Property<bool>("ZaPonijetVecera")
                         .HasColumnType("bit");
-
-                    b.Property<string>("createdByUserId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PrijavaObrokaID");
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,16 +14,29 @@ namespace Studentski_dom.Controllers
     public class PrijavaObrokaController : Controller
     {
         private readonly NasContext _context;
-       
-        public PrijavaObrokaController(NasContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<Korisnik> _userManager;
+
+        public PrijavaObrokaController(NasContext context, IHttpContextAccessor httpContextAccessor, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         // GET: PrijavaObroka
         public async Task<IActionResult> Index()
         {
-            var nasContext = _context.PrijavaObroka.Include(p => p.Student);
+
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+
+            var nasContext = _context.PrijavaObroka.Include(p => p.Student)
+                .Where(p => (p.createdByUserId == userFromDatabase.Id
+                && p.StudentID == userFromDatabase.StudentId)
+                || userFromDatabase.UserName == "uposlenikuprave@gmail.com"
+                || userFromDatabase.UserName == "sefkuhinje@gmail.com");
+
             int brojacRucak = (from row in _context.PrijavaObroka
                                where row.Rucak == true
                                select row).Count();
@@ -68,9 +83,17 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: PrijavaObroka/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
-            ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID");
+            var user = _httpContextAccessor.HttpContext.User;
+            var userFromDatabase = await _userManager.GetUserAsync(user);
+
+            var nasContext = _context.Student
+                .Where(p => p.StudentID == userFromDatabase.StudentId);
+            ViewData["StudentID"] = new SelectList(nasContext, "StudentID", "StudentID");
+
+            //    ViewData["StudentID"] = new SelectList(_context.Student, "StudentID", "StudentID");
+
             return View();
         }
 
@@ -83,6 +106,14 @@ namespace Studentski_dom.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = _httpContextAccessor.HttpContext.User;
+                var userFromDatabase = await _userManager.GetUserAsync(user);
+                if (userFromDatabase != null
+                    && userFromDatabase.StudentId == prijavaObroka.StudentID)
+                    prijavaObroka.createdByUserId = userFromDatabase.Id;
+
+                if (prijavaObroka.Rucak == true && prijavaObroka.ZaPonijetRucak == true) ViewBag.Check = "Ne možete izabrti";
+
                 _context.Add(prijavaObroka);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

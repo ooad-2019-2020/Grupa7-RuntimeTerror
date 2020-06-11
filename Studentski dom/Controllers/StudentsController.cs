@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Studentski_dom.Models;
 
 namespace Studentski_dom.Controllers
@@ -21,9 +26,26 @@ namespace Studentski_dom.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
-            var nasContext = _context.Student.Include(s => s.PrijavaStudenta).Include(s => s.Soba);
-            return View(await nasContext.ToListAsync());
-        }
+            string apiUri = "https://studentskidomruntimeterror.azurewebsites.net/";
+            List<Student> studenti = new List<Student>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(apiUri);
+                
+                client.DefaultRequestHeaders.Clear();
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage Res = await client.GetAsync("api/students/");
+                if (Res.IsSuccessStatusCode)
+                { 
+                    var response = Res.Content.ReadAsStringAsync().Result;
+                    studenti = JsonConvert.DeserializeObject<List<Student>>(response);
+                }
+            }
+            return View(studenti);
+                /*var nasContext = _context.Student.Include(s => s.PrijavaStudenta).Include(s => s.Soba);
+                return View(await nasContext.ToListAsync());*/
+            }
 
         // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -46,7 +68,7 @@ namespace Studentski_dom.Controllers
         }
 
         // GET: Students/Create
-        public IActionResult Create()
+        public IActionResult CreateAsync()
         {
             ViewData["PrijavaStudentaID"] = new SelectList(_context.PrijavaStudenta, "PrijavaStudentaID", "PrijavaStudentaID");
             ViewData["SobaID"] = new SelectList(_context.Soba, "SobaID", "SobaID");
@@ -62,6 +84,7 @@ namespace Studentski_dom.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(student);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

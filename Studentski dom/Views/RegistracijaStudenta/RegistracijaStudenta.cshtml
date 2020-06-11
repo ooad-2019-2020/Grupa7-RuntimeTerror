@@ -4,11 +4,13 @@
     ViewData["Title"] = "RegistracijaStudenta";
 }
 
-
+<body background="css/assets/img/pozadina1.jpg">
+</body>
 
 <h1 align="center">Registracija</h1>
 
 <hr />
+
 <form asp-action="RegistracijaStudenta">
     <table align="center">
         <tr style="height:100px;">
@@ -21,10 +23,15 @@
                 <label asp-for="ImePrezime" class="control-label"></label>
             </td>
             <td width="220px">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group" style="width:200px">
                     <input asp-for="ImePrezime" class="form-control" />
                     <span asp-validation-for="ImePrezime" class="text-danger"></span>
+                </div>-->
+                <div class="form-group">
+                    <input asp-for="ImePrezime" class="form-control" type="text" data-val="true" data-val-required="Morate unijeti ime i prezime" id="ImePrezime"
+                           name="ImePrezime" value="" />
+                    <span asp-validation-for="ImePrezime" class="text-danger filed-validation-valid" data-valmsg-for="ImePrezime" data-valmsg-replace="true"></span>
                 </div>
             </td>
             <td><label asp-for="Fakultet" class="control-label"></label></td>
@@ -66,10 +73,13 @@
                 <label asp-for="BrojTelefona" class="control-label"></label>
             </td>
             <td width="220px">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--   <div asp-validation-summary="ModelOnly" class="text-danger"></div> -->
                 <div class="form-group" style="width:200px">
-                    <input asp-for="BrojTelefona" class="form-control" />
-                    <span asp-validation-for="BrojTelefona" class="text-danger"></span>
+                    <input asp-for="BrojTelefona" class="form-control" type="text" data-val="true" data-val-required="Morate unijeti broj telefona" id="BrojTelefona"
+                           name="BrojTelefona" value="" />
+                    <span asp-validation-for="BrojTelefona" class="text-danger filed-validation-valid" data-valmsg-for="BrojTelefona" data-valmsg-replace="true"></span>
+                    <!--        <input asp-for="BrojTelefona" class="form-control" />
+                    <span asp-validation-for="BrojTelefona" class="text-danger"></span> -->
                 </div>
             </td>
         </tr>
@@ -79,8 +89,14 @@
             </td>
             <td width="220px">
                 <div class="form-group" style="width:200px">
-                    <input asp-for="JMBG" class="form-control" />
-                    <span asp-validation-for="JMBG" class="text-danger"></span>
+                    <input asp-for="JMBG" class="form-control" type="number" data-val="true" data-val-required="Morate unijeti JMBG" id="JMBG"
+                           data-val-minlength="JMBG mora sadržavati 13 brojeva" data-val-minlength-min="13"
+                           data-val-maxlength="JMBG mora sadržavati 13 brojeva" data-val-maxlength-max="13"
+                           name="JMBG" value="" />
+                    <span asp-validation-for="JMBG" class="text-danger filed-validation-valid" data-valmsg-for="JMBG" data-valmsg-replace="true"></span>
+
+                    <!--        <input asp-for="JMBG" class="form-control" />
+                    <span asp-validation-for="JMBG" class="text-danger"></span>-->
                 </div>
             </td>
             <td>
@@ -105,8 +121,11 @@
             </td>
             <td width="220px">
                 <div class="form-group" style="width:200px">
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <input asp-for="Email" class="form-control" type="text" data-val="true" data-val-required="Morate unijeti email" id="Email"
+                           name="Email" value="" />
+                    <span asp-validation-for="Email" class="text-danger filed-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                    <!--    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>-->
                 </div>
             </td>
         </tr>
@@ -116,8 +135,12 @@
             </td>
             <td width="220px">
                 <div class="form-group" style="width:200px">
-                    <input asp-for="AdresaStanovanja" class="form-control" />
-                    <span asp-validation-for="AdresaStanovanja" class="text-danger"></span>
+                    <input asp-for="AdresaStanovanja" class="form-control" type="text" data-val="true" data-val-required="Morate unijeti adresu stanovanja"
+                           id="AdresaStanovanja"
+                           name="AdresaStanovanja" value="" />
+                    <span asp-validation-for="AdresaStanovanja" class="text-danger filed-validation-valid" data-valmsg-for="AdresaStanovanja" data-valmsg-replace="true"></span>
+                    <!--     <input asp-for="AdresaStanovanja" class="form-control" />
+                    <span asp-validation-for="AdresaStanovanja" class="text-danger"></span>-->
                 </div>
             </td>
             <td>
@@ -135,15 +158,15 @@
                 </div>
             </td>
             <!--
-    <td>
-        <label asp-for="Fotografija" class="control-label"></label>
-    </td>
-    <td width="220px">
-        <div class="form-group" style="width:200px">
-            <input asp-for="Fotografija" class="form-control" />
-            <span asp-validation-for="Fotografija" class="text-danger"></span>
-        </div>
-    </td>-->
+            <td>
+                <label asp-for="Fotografija" class="control-label"></label>
+            </td>
+            <td width="220px">
+                <div class="form-group" style="width:200px">
+                    <input asp-for="Fotografija" class="form-control" />
+                    <span asp-validation-for="Fotografija" class="text-danger"></span>
+                </div>
+            </td>-->
         </tr>
         <tr>
             <td></td>
@@ -153,8 +176,12 @@
             </td>
             <td>
                 <div class="form-group" style="width:200px">
-                    <input asp-for="BrojIndeksa" class="form-control" />
-                    <span asp-validation-for="BrojIndeksa" class="text-danger"></span>
+                    <input asp-for="BrojIndeksa" class="form-control" type="text" data-val="true" data-val-required="Morate unijeti broj indeksa"
+                           id="BrojIndeksa" name="BrojIndeksa" value="" />
+                    <span asp-validation-for="BrojIndeksa" class="text-danger filed-validation-valid" data-valmsg-for="BrojIndeksa" data-valmsg-replace="true"></span>
+
+                    <!--      <input asp-for="BrojIndeksa" class="form-control" />
+                    <span asp-validation-for="BrojIndeksa" class="text-danger"></span>-->
                 </div>
             </td>
         </tr>
@@ -164,7 +191,7 @@
             <td></td>
             <td colspan="2">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Pošalji prijavu" class="btn btn-primary" />
                 </div>
             </td>
             <td></td>
@@ -172,9 +199,12 @@
         </tr>
     </table>
 </form>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@if (User.IsInRole("Uposlenik uprave"))
+{
+    <!--<div>
+        <a asp-action="Index">Back to List</a>
+    </div>-->
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
